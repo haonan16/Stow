@@ -9,28 +9,9 @@ Haonan Chen, Yilong Niu, Kaiwen Hong, Shuijing Liu, Yixuan Wang, Yunzhu Li, Kath
 
 ### Real-World Demo
 
-<div style="display: flex; flex-wrap: wrap;">
-  <div style="flex: 50%;">
-    <video width="320" height="240" controls autoplay muted loop>
-      <source src="media/bottle.mp4" type="video/mp4">
-    </video>
-  </div>
-  <div style="flex: 50%;">
-    <video width="320" height="240" controls autoplay muted loop>
-      <source src="media/tiny.mp4" type="video/mp4">
-    </video>
-  </div>
-  <div style="flex: 50%;">
-    <video width="320" height="240" controls autoplay muted loop>
-      <source src="media/roller.mp4" type="video/mp4">
-    </video>
-  </div>
-  <div style="flex: 50%;">
-    <video width="320" height="240" controls autoplay muted loop>
-      <source src="media/small_shelf.mp4" type="video/mp4">
-    </video>
-  </div>
-</div>
+<img src="media/bottle.gif"  width="320"  />  <img src="media/tiny.gif"  width="320"  />
+
+<img src="media/roller.gif"  width="320"  />  <img src="media/small_shelf.gif"  width="320"  />
 
 
 ### Our Method
