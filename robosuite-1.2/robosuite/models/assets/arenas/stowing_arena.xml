@@ -1,0 +1,90 @@
+<mujoco model="stowing_arena">
+  <asset>
+    <texture builtin="gradient" height="256" rgb1=".9 .9 1." rgb2=".2 .3 .4" type="skybox" width="256"/>
+    <texture file="../textures/wood-tiles.png" type="2d" name="texplane"/>
+    <material name="floorplane" reflectance="0.01" shininess="0.0" specular="0.0" texrepeat="2 2" texture="texplane" texuniform="true"/>
+    <!-- steel legs -->
+    <texture file="../textures/steel-brushed.png" type="cube" name="tex-steel-brushed"/>
+    <material name="table_legs_metal" reflectance="0.8" shininess="0.8" texrepeat="1 1" texture="tex-steel-brushed" />
+    <!-- plaster walls -->
+    <texture file="../textures/cream-plaster.png" type="2d" name="tex-cream-plaster"/>
+    <material name="walls_mat" reflectance="0.0" shininess="0.1" specular="0.1" texrepeat="3 3" texture="tex-cream-plaster" texuniform="true" />
+    <!-- bins -->
+    <texture file="../textures/light-wood.png" type="2d" name="tex-light-wood"/>
+    <texture file="../textures/dark-wood.png" type="2d" name="tex-dark-wood"/>
+    <material name="light-wood" reflectance="0" texrepeat="15 15" texture="tex-light-wood" texuniform="true"/>
+    <material name="dark-wood" reflectance="0" texrepeat="5 5" texture="tex-dark-wood" texuniform="true"/>
+    <!-- ceramic table texture and material-->
+    <texture file="../textures/ceramic.png" type="cube" name="tex-ceramic"/>
+    <material name="table_ceramic" reflectance="0.0" shininess="0.0" specular="0.2" texrepeat="1 1" texture="tex-ceramic" />
+  </asset>
+  <worldbody>
+    <geom condim="3" group="1" material="floorplane" name="floor" pos="0 0 0" size="3 3 .125" type="plane"/>
+    <!-- Table body -->
+    <body name="table" pos="0 0 0.4">
+      <geom pos="0 0 0" size="0.6 0.4 0.4" type="box" group="0" name="table_collision" friction="0.3 0.005 0.0001"/>
+      <geom pos="0 0 0" size="0.6 0.4 0.4" type="box" conaffinity="0" contype="0" group="1" name="table_visual" material="table_ceramic"/>
+      <site pos="0 0 0.4" name="table_top" size="0.001 0.001 0.001" rgba="0 0 0 0"/>
+      <!-- Legs (visual only) -->
+      <geom pos="0 0 0" size="0.05 0.1" type="cylinder" conaffinity="0" contype="0" group="1" name="table_leg1_visual" material="table_legs_metal"/>
+      <geom pos="0 0 0" size="0.05 0.1" type="cylinder" conaffinity="0" contype="0" group="1" name="table_leg2_visual" material="table_legs_metal"/>
+      <geom pos="0 0 0" size="0.05 0.1" type="cylinder" conaffinity="0" contype="0" group="1" name="table_leg3_visual" material="table_legs_metal"/>
+      <geom pos="0 0 0" size="0.05 0.1" type="cylinder" conaffinity="0" contype="0" group="1" name="table_leg4_visual" material="table_legs_metal"/>
+    </body>
+
+    <!-- Walls (visual only) -->
+    <geom pos="-1.25 2.25 1.5" quat="0.6532815 0.6532815 0.2705981 0.2705981" size="1.06 1.5 0.01" type="box" conaffinity="0" contype="0" group="1" name="wall_leftcorner_visual" material="walls_mat"/>
+    <geom pos="-1.25 -2.25 1.5" quat="0.6532815 0.6532815 -0.2705981 -0.2705981" size="1.06 1.5 0.01" type="box" conaffinity="0" contype="0" group="1" name="wall_rightcorner_visual" material="walls_mat"/>
+    <geom pos="1.25 3 1.5" quat="0.7071 0.7071 0 0" size="1.75 1.5 0.01" type="box" conaffinity="0" contype="0" group="1" name="wall_left_visual" material="walls_mat"/>
+    <geom pos="1.25 -3 1.5" quat="0.7071 -0.7071 0 0" size="1.75 1.5 0.01" type="box" conaffinity="0" contype="0" group="1" name="wall_right_visual" material="walls_mat"/>
+    <geom pos="-2 0 1.5" quat="0.5 0.5 0.5 0.5" size="1.5 1.5 0.01" type="box" conaffinity="0" contype="0" group="1" name="wall_rear_visual" material="walls_mat"/>
+    <geom pos="3 0 1.5" quat="0.5 0.5 -0.5 -0.5" size="3 1.5 0.01" type="box" conaffinity="0" contype="0" group="1" name="wall_front_visual" material="walls_mat"/>
+    <!-- bins -->
+    <body name="shelf" pos="0.35 0 0.8" >
+        <geom pos="0 0 0" size="0.0625 0.1175 0.0005" type="box" group="0" friction="1 0.005 0.0001" name="shelf_bottom_collision"/>
+        <geom pos="0 0 0" size="0.0625 0.1175 0.0005" type="box" conaffinity="0" contype="0" group="1" name="shelf_bottom_visual" material="light-wood" />
+        <geom pos="0 0.117 0.0835" size="0.0625 0.00005 0.0835" type="box" group="0" friction="1 0.005 0.0001" rgba="0 0 1 1 " name="shelf_right_collision"/>
+        <geom pos="0 0.117 0.0835" size="0.0625 0.00005 0.0835" type="box" conaffinity="0" contype="0" group="1" material="light-wood" name="shelf_right_visual"/>
+        <geom pos="0 -0.117 0.0835" size="0.0625 0.00005 0.0835" type="box" group="0" friction="1 0.005 0.0001" rgba="0 0 1 1" name="shelf_left_collision"/>
+        <geom pos="0 -0.117 0.0835" size="0.0625 0.00005 0.0835" type="box" conaffinity="0" contype="0" group="1" material="light-wood" name="shelf_left_visual"/>
+        <!-- <geom pos="0.2 0 0.05" size="0.01 0.25 0.05" type="box" group="0" friction="1 0.005 0.0001" rgba="0 0 1 1"/>
+        <geom pos="0.2 0 0.05" size="0.01 0.25 0.05" type="box" conaffinity="0" contype="0" group="1" material="light-wood"/>
+        <geom pos="-0.2 0 0.05" size="0.01 0.25 0.05" type="box" group="0" friction="1 0.005 0.0001" rgba="0 0 1 1"/>
+        <geom pos="-0.2 0 0.05" size="0.01 0.25 0.05" type="box" conaffinity="0" contype="0" group="1" material="light-wood"/> -->
+        <!-- Legs (visual only) -->
+        <!-- <geom pos="0.15 0.2 -0.4" size="0.01 0.4" type="cylinder" conaffinity="0" contype="0" group="1" name="bin1_leg1_visual" material="table_legs_metal"/>
+        <geom pos="-0.15 0.2 -0.4" size="0.01 0.4" type="cylinder" conaffinity="0" contype="0" group="1" name="bin1_leg2_visual" material="table_legs_metal"/>
+        <geom pos="-0.15 -0.2 -0.4" size="0.01 0.4" type="cylinder" conaffinity="0" contype="0" group="1" name="bin1_leg3_visual" material="table_legs_metal"/>
+        <geom pos="0.15 -0.2 -0.4" size="0.01 0.4" type="cylinder" conaffinity="0" contype="0" group="1" name="bin1_leg4_visual" material="table_legs_metal"/> -->
+    </body>
+    <body name="box" pos="0.1 -0.2 1">
+    <!-- 6 dof -->
+      <joint type="free"/>  
+      <geom type="box" size="0.06 0.05 0.15" friction="1" euler= "0 0 0" rgba="0 .9 0 1"/>
+    </body>
+
+    <light pos="1.0 1.0 1.5" dir="-0.2 -0.2 -1" specular="0.3 0.3 0.3" directional="true" castshadow="false"/>
+    <!-- front view -->
+    <camera mode="fixed" name="frontview" pos="1.6 0 1.45" quat="0.56 0.43 0.43 0.56"/>
+    <!-- bird view -->
+    <camera mode="fixed" name="birdview" pos="-0.2 0 3.0" quat="0.7071 0 0 0.7071"/>
+    <!-- agent view -->
+    <camera mode="fixed" name="agentview" pos="1.5 0 2.45" quat="0.653 0.271 0.271 0.653"/>
+    <!-- side view -->
+    <camera mode="fixed" name="sideview" pos="-0.05651774593317116 1.2761224129427358 1.4879572214102434" quat="0.009905065491771751 0.006877963156909582 0.5912228352893879 0.806418094001364" />
+    <!-- quat scalar first -->
+    <camera mode="fixed" name="cam_1" pos="-0.44675791731108677 0.34306124544170413 1.3808820466643639" quat="0.3617766797542572 0.2232322096824646 -0.4631667733192444 -0.7776641845703125" />
+    <camera mode="fixed" name="cam_2" pos="0.649045 0.5120899999999999 1.52376" quat="0.3113839030265808 0.12753650546073914 0.35117024183273315 0.8737584948539734" />
+    <camera mode="fixed" name="cam_3" pos="0.6490445481702322 -0.5120897077156527 1.52375939060387" quat="0.7766200304031372 0.35537970066070557 0.0947272777557373 0.5114619731903076" />
+    <camera mode="fixed" name="cam_4" pos="-0.6109497446195349 -0.49831416844507237 1.4944516712656408" quat="0.7372738122940063 0.36237767338752747 -0.2755787968635559 -0.4991656541824341" />
+
+    <camera mode="fixed" name="paper" pos="0.8006967857650461 -0.08940646457330322 1.5396551439293946" quat="0.6440190076828003 0.2820746600627899 0.29403531551361084 0.6474691033363342" />
+    <camera mode="fixed" name="cam_slide" pos="0.6484293264549131 -0.04383541963445736 1.338449720283494" quat="0.6645715236663818 0.2537079155445099 0.24247753620147705 0.6596829891204834" />
+    <camera mode="fixed" name="cam_push" pos="0.0369925993518557 -0.20278079178692254 1.3892564096348934" quat="0.7077345252037048 0.0546099953353405 0.06976878643035889 0.7009007930755615" />
+
+    <!-- <camera mode="fixed" name="cam_1" pos="-0.13215799999999997 0.374797 1.54896" quat="0.3505987226963043 0.1152355968952179 -0.35731470584869385 -0.8579787611961365" />    
+    <camera mode="fixed" name="cam_2" pos="0.5769275333578648 0.3351014028000964 1.543685294686948" quat="0.46530550718307495 0.04414620250463486 0.316770076751709 0.8253475427627563" />
+    <camera mode="fixed" name="cam_3" pos="0.6490445481702322 -0.5120897077156527 1.52375939060387" quat="0.7766200304031372 0.35537970066070557 0.0947272777557373 0.5114619731903076" />
+    <camera mode="fixed" name="cam_4" pos="-0.4294716530234528 -0.4365879645742269 1.6884404015128576" quat="0.7865671515464783 0.2861505448818207 -0.188035249710083 -0.5138803124427795" /> -->
+  </worldbody>
+</mujoco>
