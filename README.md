@@ -22,8 +22,8 @@ Haonan Chen, Yilong Niu, Kaiwen Hong, Shuijing Liu, Yixuan Wang, Yunzhu Li, Kath
 ## Prerequisites
 
 - **Operating System**: Ubuntu 20.04.
-- **Python**: Version 3.8 is verified.
-- **Environment**: robosuiVte-1.2.
+- **Python**: 3.8.
+- **Environment**: robosuite-1.2.
 
 
 ## Installation Steps
